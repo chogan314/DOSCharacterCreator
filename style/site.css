@@ -1,0 +1,35 @@
+#wrapper {
+	width: 90%;
+	margin: auto;
+}
+
+#header {
+	background-color: #ffffff;
+	height: 80px;
+}
+
+.column-left { 
+	float: left;
+	width: 32%;
+}
+
+.column-center {
+	float: left;
+	margin-right: 1.5%;
+	margin-left: 1.5%;
+	width: 32%;
+}
+
+.column-right { 
+	float: left;
+	width: 32%;
+}
+
+
+#level {
+	font-size: 64px;
+	font-family: Helvetica, Arial, sans-serif;
+	float: left;
+	height: 100%;
+	line-height: 100%;
+}
