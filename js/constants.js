@@ -43,6 +43,10 @@ var abilityEnum = {
 	sneaking: 26
 }
 
+var firstSkillIdx = abilityEnum.aerotheurge;
+var lastSkillIdx = abilityEnum.witchcraft;
+var numSkills = lastSkillIdx - firstSkillIdx;
+
 var talentEnum = {
 	all_skilled_up: 0,
 	anaconda: 1,

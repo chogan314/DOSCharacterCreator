@@ -1,35 +1,119 @@
 #wrapper {
-	width: 90%;
+	width: 60%;
 	margin: auto;
+	font-family: Helvetica, Arial, sans-serif;
+	min-width: 800px;
 }
 
-#header {
-	background-color: #ffffff;
-	height: 80px;
+.clear_floats {
+	clear: both;
 }
 
-.column-left { 
+.column_left {
 	float: left;
 	width: 32%;
 }
 
-.column-center {
+.column_center {
 	float: left;
 	margin-right: 1.5%;
 	margin-left: 1.5%;
 	width: 32%;
 }
 
-.column-right { 
+.column_right {
 	float: left;
 	width: 32%;
 }
 
+#header {
+	background-color: #cccccc;
+	height: 100px;
+	margin-bottom: 16px;
+}
 
 #level {
+	color: red;
 	font-size: 64px;
-	font-family: Helvetica, Arial, sans-serif;
 	float: left;
 	height: 100%;
-	line-height: 100%;
 }
+
+#level_button_container {
+	font-size: 32px;
+	color: green;
+	float: left;
+	height: 100%;
+}
+
+#points_labels_container {
+	float: right;
+	text-align: right;
+	height: 100%
+}
+
+#points_container {
+	height: 100%;
+	float: right;
+	text-align: right;
+}
+
+#attr_points_label {
+	height: 33%;
+	font-size: 1.4em;
+	color: blue;
+}
+
+#abil_points_label {
+	height: 33%;
+	font-size: 1.4em;
+	color: purple;
+}
+
+#talent_points_label {
+	height: 33%;
+	font-size: 1.4em;
+}
+
+#attr_points {
+	height: 33%;
+	font-size: 1.4em;
+	color: blue;
+}
+
+#abil_points {
+	height: 33%;
+	font-size: 1.4em;
+	color: purple;
+}
+
+#talent_points {
+	height: 33%;
+	font-size: 1.4em;
+}
+
+#attributes {
+	background-color: #cc00cc;
+}
+
+#abilities {
+	background-color: #00cccc;
+}
+
+#talents {
+	background-color: #cccc00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
