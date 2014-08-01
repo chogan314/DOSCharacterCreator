@@ -121,14 +121,20 @@ Character.prototype.canLevelDown = function() {
 		}
 	
 		if (this.level >= 11) {
-			canLevel = this.talents[talentEnum.lone_wolf] ? this.abilPointsRemaining() >= 4 : this.abilPointsRemaining() >= 3;
-			reqs.push("Not enough free ability points.");
+			if ((this.talents[talentEnum.lone_wolf] && this.abilPointsRemaining() < 4) || this.abilPointsRemaining() < 3) {
+				canLevel = false;
+				reqs.push("Not enough free ability points.");
+			}
 		} else if (this.level >= 6) {
-			canLevel = this.talents[talentEnum.lone_wolf] ? this.abilPointsRemaining() >= 3 : this.abilPointsRemaining() >= 2;
-			reqs.push("Not enough free ability points.");
+			if ((this.talents[talentEnum.lone_wolf] && this.abilPointsRemaining() < 3) || this.abilPointsRemaining() < 2) {
+				canLevel = false;
+				reqs.push("Not enough free ability points.");
+			}
 		} else {
-			canLevel = this.talents[talentEnum.lone_wolf] ? this.abilPointsRemaining() >= 2 : this.abilPointsRemaining() >= 1;
-			reqs.push("Not enough free ability points.");
+			if ((this.talents[talentEnum.lone_wolf] && this.abilPointsRemaining() < 2) || this.abilPointsRemaining() < 1) {
+				canLevel = false;
+				reqs.push("Not enough free ability points.");
+			}
 		}
 		
 		if (this.level <= 20 && (this.level + 1) % 4 === 0 && this.talentPointsRemaining() <= 0) {
@@ -361,8 +367,8 @@ Character.prototype.canAddTalent = function(talentIdx) {
 	}
 	
 	// Utility
-	function checkReqAbility(abilities, abilIdx, reqLvl) {
-		if (abilities[abilIdx] < reqLvl) {
+	function checkReqAbility(source, abilIdx, reqLvl) {
+		if (source.effectiveAbilLevel(abilIdx) < reqLvl) {
 			failCondition = true;
 			reqs.push("Requires " + abilityNames[abilIdx] + " of at least level " + reqLvl);
 		}
@@ -380,16 +386,16 @@ Character.prototype.canAddTalent = function(talentIdx) {
 			checkReqLevel(this.level, 3);
 			break;
 		case talentEnum.anaconda:
-			checkReqAbility(this.abilities, abilityEnum.single_handed, 1);
+			checkReqAbility(this, abilityEnum.single_handed, 1);
 			break;
 		case talentEnum.back_stabber:
-			checkReqAbility(this.abilities, abilityEnum.scoundrel, 1);
+			checkReqAbility(this, abilityEnum.scoundrel, 1);
 			break;
 		case talentEnum.bigger_and_better:
 			checkReqLevel(this.level, 5);
 			break;
 		case talentEnum.comeback_kid:
-			checkReqAbility(this.abilities, abilityEnum.willpower, 5);
+			checkReqAbility(this, abilityEnum.willpower, 5);
 			break;
 		case talentEnum.courageous:
 			if (this.talents[talentEnum.escapist]) {
@@ -398,10 +404,10 @@ Character.prototype.canAddTalent = function(talentIdx) {
 			}
 			break;
 		case talentEnum.demon:
-			checkReqAbility(this.abilities, abilityEnum.pyrotechnic, 5);
+			checkReqAbility(this, abilityEnum.pyrotechnic, 5);
 			break;
 		case talentEnum.elemental_ranger:
-			checkReqAbility(this.abilities, abilityEnum.expert_marksman, 5);
+			checkReqAbility(this, abilityEnum.expert_marksman, 5);
 			break;
 		case talentEnum.escapist:
 			if (this.talents[talentEnum.courageous]) {
@@ -413,55 +419,55 @@ Character.prototype.canAddTalent = function(talentIdx) {
 			checkReqLevel(this.level, 5);
 			break;
 		case talentEnum.guerilla:
-			checkReqAbility(this.abilities, abilityEnum.sneaking, 1);
+			checkReqAbility(this, abilityEnum.sneaking, 1);
 			break;
 		case talentEnum.headstrong:
-			checkReqAbility(this.abilities, abilityEnum.scoundrel, 5);
+			checkReqAbility(this, abilityEnum.scoundrel, 5);
 			break;
 		case talentEnum.ice_king:
-			checkReqAbility(this.abilities, abilityEnum.hydrosophist, 5);
+			checkReqAbility(this, abilityEnum.hydrosophist, 5);
 			break;
 		case talentEnum.lightning_rod:
-			checkReqAbility(this.abilities, abilityEnum.aerotheurge, 5);
+			checkReqAbility(this, abilityEnum.aerotheurge, 5);
 			break;
 		case talentEnum.morning_person:
-			checkReqAbility(this.abilities, abilityEnum.body_building, 1);
+			checkReqAbility(this, abilityEnum.body_building, 1);
 			break;
 		case talentEnum.opportunist:
-			checkReqAbility(this.abilities, abilityEnum.man_at_arms, 1);
+			checkReqAbility(this, abilityEnum.man_at_arms, 1);
 			break;
 		case talentEnum.picture_of_health:
-			checkReqAbility(this.abilities, abilityEnum.man_at_arms, 2);
+			checkReqAbility(this, abilityEnum.man_at_arms, 2);
 			break;
 		case talentEnum.quickdraw:
-			checkReqAbility(this.abilities, abilityEnum.expert_marksman, 5);
+			checkReqAbility(this, abilityEnum.expert_marksman, 5);
 			break;
 		case talentEnum.sidestep:
-			checkReqAbility(this.abilities, abilityEnum.expert_marksman, 2);
+			checkReqAbility(this, abilityEnum.expert_marksman, 2);
 			break;
 		case talentEnum.sidewinder:
-			checkReqAbility(this.abilities, abilityEnum.man_at_arms, 5);
+			checkReqAbility(this, abilityEnum.man_at_arms, 5);
 			break;
 		case talentEnum.speedcreeper:
-			checkReqAbility(this.abilities, abilityEnum.sneaking, 1);
+			checkReqAbility(this, abilityEnum.sneaking, 1);
 			break;
 		case talentEnum.stand_your_ground:
-			checkReqAbility(this.abilities, abilityEnum.body_building, 5);
+			checkReqAbility(this, abilityEnum.body_building, 5);
 			break;
 		case talentEnum.swift_footed:
-			checkReqAbility(this.abilities, abilityEnum.scoundrel, 2);
+			checkReqAbility(this, abilityEnum.scoundrel, 2);
 			break;
 		case talentEnum.thick_skin:
-			checkReqAbility(this.abilities, abilityEnum.man_at_arms, 1);
+			checkReqAbility(this, abilityEnum.man_at_arms, 1);
 			break;
 		case talentEnum.voluble_mage:
-			checkReqAbility(this.abilities, abilityEnum.willpower, 5);
+			checkReqAbility(this, abilityEnum.willpower, 5);
 			break;
 		case talentEnum.weather_the_storm:
-			checkReqAbility(this.abilities, abilityEnum.man_at_arms, 5);
+			checkReqAbility(this, abilityEnum.man_at_arms, 5);
 			break;
 		case talentEnum.weatherproof:
-			checkReqAbility(this.abilities, abilityEnum.geomancer, 5);
+			checkReqAbility(this, abilityEnum.geomancer, 5);
 			break;
 		default:
 			failCondition = false;
@@ -509,11 +515,61 @@ Character.prototype.canRemoveTalent = function(talentIdx) {
 }
 
 Character.prototype.addTalent = function(talentIdx) {
+	switch(talentIdx) {
+		case talentEnum.all_skilled_up:
+			this.abilPoints += 2;
+			break;
+		case talentEnum.bigger_and_better:
+			this.attrPoints++;
+			break;
+		case talentEnum.lone_wolf:
+			this.abilPoints += level - 1;
+			break;
+		case talentEnum.know_it_all:
+			this.attributeBonuses[attributeEnum.intelligence]++;
+			break;
+		case talentEnum.politician:
+			this.attributeBonuses[attributeEnum.intelligence]--;
+			this.abilityBonuses[abilityEnum.charisma] += 2;
+			break;
+		case talentEnum.scientist:
+			this.abilityBonuses[abilityEnum.blacksmithing]++;
+			this.abilityBonuses[abilityEnum.crafting]++;
+			break;
+		default:
+	}
 	
+	this.talents[talentIdx] = true;
+	this.talentPointsSpent++;
 }
 
 Character.prototype.removeTalent = function(talentIdx) {
+	switch(talentIdx) {
+		case talentEnum.all_skilled_up:
+			this.abilPoints -= 2;
+			break;
+		case talentEnum.bigger_and_better:
+			this.attrPoints--;
+			break;
+		case talentEnum.lone_wolf:
+			this.abilPoints -= level - 1;
+			break;
+		case talentEnum.know_it_all:
+			this.attributeBonuses[attributeEnum.intelligence]--;
+			break;
+		case talentEnum.politician:
+			this.attributeBonuses[attributeEnum.intelligence]++;
+			this.abilityBonuses[abilityEnum.charisma] -= 2;
+			break;
+		case talentEnum.scientist:
+			this.abilityBonuses[abilityEnum.blacksmithing]--;
+			this.abilityBonuses[abilityEnum.crafting]--;
+			break;
+		default:
+	}
 
+	this.talents[talentIdx] = false;
+	this.talentPointsSpent--;
 }
 
 Character.prototype.toString = function() {
@@ -568,26 +624,12 @@ Character.prototype.printReqs = function() {
 	}
 }
 
-var dude = new Character();
-dude.init();
-dude.increaseAttribute(attributeEnum.strength);
-dude.increaseAttribute(attributeEnum.strength);
-dude.increaseAttribute(attributeEnum.strength);
-dude.increaseAttribute(attributeEnum.strength);
-dude.increaseAttribute(attributeEnum.strength);
-dude.increaseAbility(abilityEnum.two_handed);
-dude.increaseAbility(abilityEnum.two_handed);
-dude.increaseAbility(abilityEnum.single_handed);
-dude.increaseAbility(abilityEnum.body_building);
-dude.talents[0] = true;
-dude.talents[1] = true;
-dude.talentPoints = 0;
-console.log(dude.toString());
-dude.printReqs();
 
 
-
-
+//var dude = new Character();
+//dude.init();
+//console.log(dude.toString());
+//dude.printReqs();
 
 
 

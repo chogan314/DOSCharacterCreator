@@ -4,6 +4,12 @@ var abilityNames = ["Bow", "Crossbow", "Single-handed", "Two-handed", "Armour Sp
 
 var talentNames = ["All Skilled Up", "Anaconda", "Arrow Recovery", "Back-Stabber", "Bigger and Better", "Bully", "Comeback Kid", "Courageous", "Demon", "Elemental Affinity", "Elemental Ranger", "Escapist", "Far Out Man", "Five-Star Diner", "Glass Cannon", "Guerilla", "Headstrong", "Ice King", "Know-it-All", "Leech", "Light Stepper", "Lightning Rod", "Lone Wolf", "Morning Person", "My Precious", "Opportunist", "Packmule", "Pet Pal", "Picture of Health", "Politician", "Quickdraw", "Scientist", "Sidestep", "Sidewinder", "Speedcreeper", "Stand your Ground", "Stench", "Swift Footed", "Thick Skin", "Voluble Mage", "Walk it Off", "Weather the Storm", "Weatherproof", "What a Rush", "Zombie"];
 
+var statTypeEnum = {
+	attribute: 0,
+	ability: 1,
+	talent: 2
+}
+
 var attributeEnum = {
 	strength: 0,
 	dexterity: 1,
